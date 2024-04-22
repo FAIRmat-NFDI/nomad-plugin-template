@@ -9,12 +9,12 @@ A template repository for creating a repository with a NOMAD plugin package.
 
 1. Click on the `Use this template` button and create a new plugin repository. The form will ask you to fill out the name for the new plugin repository.
 
-2. Generate a New Project
+2. In the newly created repository, start a new Github Codespace and generate the plugin structure.
 
 Run the following command to create a new Nomad plugin project using cookiecutter-nomad-plugin:
 
 ```sh
-cruft create https://github.com/blueraft/cookiecutter-nomad-plugin
+cruft create https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin
 ```
 
 Cookiecutter prompts you for information regarding your plugin:
@@ -32,11 +32,10 @@ Select license:
 2 - BSD-3
 3 - GNU GPL v3.0+
 Choose from 1, 2, 3 [1]: 2
-Select variant:
-1 - schema
-2 - normalizer
-3 - parser
-Choose from 1, 2, 3 [1]: 2
+include_schema [y/n] (y): y
+include_normalizer [y/n] (y): n
+include_parser [y/n] (y): y
+include_app [y/n] (y): n
 
 INFO:post_gen_project:Initializing python for schema - src
 ..
@@ -47,7 +46,12 @@ INFO:post_gen_project:Remove temporary folder: py_sources
 
 
 
+
 There you go - you just created a minimal nomad plugin:
+
+> [!NOTE]
+> In the above prompt, we pressed `y` for schema and parser, this creates a python package with two plugins one for parser and one for schema.
+
 ```no-highlight
 nomad-awesome/
 ├── LICENSE
@@ -57,7 +61,13 @@ nomad-awesome/
 ├── src
 │   └── noamd_awesome
 │       ├── __init__.py
-│       └── plugin.py
+|       ├── schema
+│       |   ├── __init__.py
+│       |   └── plugin.py
+|       └── parser
+│           ├── __init__.py
+│           └── plugin.py
+|
 ├── tests
 │   ├── conftest.py
 │   └── test_awesome.py
